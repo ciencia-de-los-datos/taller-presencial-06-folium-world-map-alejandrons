@@ -26,7 +26,7 @@ def add_countries_column(affiliations):
     
     affiliations = affiliations.copy()
     affiliations["countries"] = affiliations["Affiliations"].copy()
-    affiliations["countries"] = affiliations["countries"].str.split("; ")
+    affiliations["countries"] = affiliations["countries"].str.split(";")
     affiliations["countries"] = affiliations["countries"].map(
         lambda x: [y.split(", ") for y in x]
     )
@@ -78,7 +78,7 @@ def plot_world_map(countries):
 
     return countries
 
-if __name__ == "__main__":
+def main():
     affiliations = load_affiliations()
     affiliations = remove_na_rows(affiliations)
     affiliations = add_countries_column(affiliations)
@@ -86,3 +86,6 @@ if __name__ == "__main__":
     countries = count_country_frequency(affiliations)
     countries.to_csv("countries.csv")
     plot_world_map(countries)
+
+if __name__ == "__main__":
+    main()
